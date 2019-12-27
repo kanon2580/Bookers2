@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-inverse navbar-fixed-top header">
+        <div class="container">
+          <div class="row">
+            <div class="navbar-header">
+              <p>Bookers</p>
+            </div>
+            <% if user_signed_in? %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to user_path(current_user) do %>
+                  <span class="glyphicon glyphicon-home"></span> Home
+                <% end %></li>
+
+                <li><%= link_to users_path do %>
+                  <span class="glyphicon glyphicon-user"></span> Users
+                <% end %></li>
+                <li> <%= link_to books_path do %>
+                  <span class="glyphicon glyphicon-book"></span> Books
+                <% end %></li>
+                <li><%= link_to destroy_user_session_path, method: :delete do %>
+                  <span class="glyphicon glyphicon-log-out"></span> logout
+                <% end %></li>
+              </ul>
+
+            <% else %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to root_path do %>
+                  <span class="glyphicon glyphicon-home"></span> Home
+                <% end %></li>
+
+                <li><%= link_to home_about_path do %>
+                  <span class="glyphicon glyphicon-link"></span> About
+                <% end %></li>
+
+                <li><%= link_to new_user_registration_path do %>
+                  <span class="glyphicon glyphicon-edit"></span> sign up
+                <% end %></li>
+
+                <li><%= link_to new_user_session_path do %>
+                  <span class="glyphicon glyphicon-log-in"></span> login
+                <% end %></li>
+              </ul>
+
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <%= render 'layouts/success' %>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-lg-offset-9">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
